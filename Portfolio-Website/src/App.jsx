@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Layout from './components/Layout';
 import LoadingScreen from './components/LoadingScreen';
 import Hero from './components/Hero';
+import AboutSection from './components/AboutSection';
 import AchievementStats from './components/AchievementStats';
 import ProjectsSection from './components/ProjectsSection';
 import JourneyTimeline from './components/JourneyTimeline';
@@ -45,6 +46,7 @@ function App() {
       {!loading && (
         <main className="w-full min-h-screen">
           <div id="home"><Hero /></div>
+          <div id="about"><AboutSection /></div>
           <AchievementStats />
           <div id="projects"><ProjectsSection /></div>
           <EngineeringPipeline />

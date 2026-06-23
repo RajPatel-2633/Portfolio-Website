@@ -49,7 +49,7 @@ export default function LoadingScreen({ onComplete }) {
         >
           <div className="relative flex items-center">
             <span className="text-4xl font-bold tracking-tighter text-foreground">
-              RP
+              RP26
             </span>
             {phase === 'typing' && (
               <span className="text-4xl font-bold tracking-tighter text-foreground">

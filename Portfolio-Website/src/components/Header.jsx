@@ -13,7 +13,7 @@ export default function Header() {
       className="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-6 md:px-12 bg-white/80 backdrop-blur-md border-b border-gray-100"
     >
       <div className="font-black text-2xl tracking-tighter text-black flex items-baseline">
-        RP<span className="text-[#4F6F52]">.</span>
+        RP26<span className="text-[#4F6F52]">.</span>
       </div>
 
       <nav className="hidden lg:flex items-center space-x-8">

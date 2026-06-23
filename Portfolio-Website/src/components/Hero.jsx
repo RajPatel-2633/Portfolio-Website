@@ -3,17 +3,73 @@ import { motion } from 'framer-motion';
 import ThreeDBrain from './ThreeDBrain';
 import { ArrowRight, Download, Brain, Eye, Cpu, Code2, Zap, Link } from 'lucide-react';
 
-const TAGS_LEFT = [
-  { icon: Brain, text: "Machine Learning", top: "10%", delay: 0.2 },
-  { icon: Eye, text: "Computer Vision", top: "50%", delay: 0.4 },
-  { icon: Cpu, text: "Deep Learning", top: "90%", delay: 0.6 }
+const ORBIT_TAGS = [
+  { icon: Brain, text: "Machine Learning", delay: 0.2 },
+  { icon: Code2, text: "</> MERN Stack", delay: 0.3 },
+  { icon: Eye, text: "Computer Vision", delay: 0.4 },
+  { icon: Zap, text: "FastAPI", delay: 0.5 },
+  { icon: Cpu, text: "Deep Learning", delay: 0.6 },
+  { icon: Link, text: "LangChain", delay: 0.7 }
 ];
 
-const TAGS_RIGHT = [
-  { icon: Code2, text: "</> MERN Stack", top: "10%", delay: 0.3 },
-  { icon: Zap, text: "FastAPI", top: "50%", delay: 0.5 },
-  { icon: Link, text: "LangChain", top: "90%", delay: 0.7 }
-];
+const TypewriterText = () => {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+    
+    const sequence = async () => {
+      const wait = (ms) => new Promise(r => setTimeout(r, ms));
+      
+      // 1. Write "MERN Stack Developer"
+      const str1 = "MERN Stack Developer";
+      for (let i = 1; i <= str1.length; i++) {
+        if (!isMounted) return;
+        setText(str1.slice(0, i));
+        await wait(60);
+      }
+      
+      await wait(1200); // pause
+      
+      // 2. Erase it
+      for (let i = str1.length; i >= 0; i--) {
+        if (!isMounted) return;
+        setText(str1.slice(0, i));
+        await wait(40);
+      }
+      
+      await wait(400); // pause
+      
+      // 3. Write "AI/ML Engineer"
+      const str2 = "AI/ML Engineer";
+      for (let i = 1; i <= str2.length; i++) {
+        if (!isMounted) return;
+        setText(str2.slice(0, i));
+        await wait(60);
+      }
+      
+      await wait(600); // pause
+      
+      // 4. Write " | MERN Stack Developer"
+      const str3 = " | MERN Stack Developer";
+      for (let i = 1; i <= str3.length; i++) {
+        if (!isMounted) return;
+        setText(str2 + str3.slice(0, i));
+        await wait(60);
+      }
+    };
+    
+    sequence();
+    
+    return () => { isMounted = false; };
+  }, []);
+
+  return (
+    <span className="inline-block min-h-[32px]">
+      {text}<span className="animate-pulse ml-[2px] text-[#4F6F52] font-light">|</span>
+    </span>
+  );
+};
 
 export default function Hero() {
   return (
@@ -47,9 +103,9 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl font-medium text-gray-600 mb-2"
+              className="text-xl md:text-2xl font-medium text-gray-600 mb-2 h-[32px] md:h-[40px] flex items-center"
             >
-              AI/ML Engineer <span className="text-gray-300 mx-2">|</span> MERN Stack Developer <span className="text-gray-300 mx-2">|</span>
+              <TypewriterText />
             </motion.div>
           </div>
 
@@ -93,43 +149,46 @@ export default function Hero() {
           {/* Subtle Radial Glow Behind Brain */}
           <div className="absolute inset-0 bg-[#4F6F52] opacity-10 blur-3xl rounded-full scale-75 -z-10" />
 
-          {/* Left Tags */}
-          {TAGS_LEFT.map((tag, i) => (
-            <motion.div 
-              key={`left-${i}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
-              transition={{ 
-                opacity: { delay: tag.delay, duration: 1 },
-                scale: { delay: tag.delay, duration: 1 },
-                y: { duration: 8 + i * 1.5, repeat: Infinity, ease: "easeInOut", delay: tag.delay }
-              }}
-              className="absolute hidden md:flex items-center space-x-1.5 bg-white border border-gray-200 shadow-[0_4px_24px_rgba(0,0,0,0.06)] rounded-full px-3 py-1.5 text-[10px] sm:text-[11px] font-medium text-gray-600 whitespace-nowrap z-20"
-              style={{ left: "15%", top: tag.top }}
-            >
-              <tag.icon className="w-3 h-3 text-gray-400" strokeWidth={2} />
-              <span>{tag.text}</span>
-            </motion.div>
-          ))}
-
-          {/* Right Tags */}
-          {TAGS_RIGHT.map((tag, i) => (
-            <motion.div 
-              key={`right-${i}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
-              transition={{ 
-                opacity: { delay: tag.delay, duration: 1 },
-                scale: { delay: tag.delay, duration: 1 },
-                y: { duration: 9 + i * 1.5, repeat: Infinity, ease: "easeInOut", delay: tag.delay }
-              }}
-              className="absolute hidden md:flex items-center space-x-1.5 bg-white border border-gray-200 shadow-[0_4px_24px_rgba(0,0,0,0.06)] rounded-full px-3 py-1.5 text-[10px] sm:text-[11px] font-medium text-gray-600 whitespace-nowrap z-20"
-              style={{ right: "15%", top: tag.top }}
-            >
-              <tag.icon className="w-3 h-3 text-gray-400" strokeWidth={2} />
-              <span>{tag.text}</span>
-            </motion.div>
-          ))}
+          {/* Orbiting Tags Wrapper */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            className="absolute hidden md:flex w-[480px] h-[480px] items-center justify-center z-20 pointer-events-none"
+          >
+            {ORBIT_TAGS.map((tag, i) => {
+              const angle = (i / ORBIT_TAGS.length) * 360;
+              const radius = 240;
+              
+              return (
+                <div
+                  key={i}
+                  className="absolute w-full h-full flex items-center justify-center"
+                  style={{ transform: `rotate(${angle}deg)` }}
+                >
+                  {/* Pushed to the edge */}
+                  <div className="absolute" style={{ transform: `translateX(${radius}px)` }}>
+                    {/* Counter rotation for animation */}
+                    <motion.div
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                    >
+                      {/* The actual card */}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: tag.delay, duration: 0.8 }}
+                        className="flex items-center space-x-2.5 bg-white/90 backdrop-blur-md border border-gray-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold text-gray-700 whitespace-nowrap pointer-events-auto"
+                        style={{ transform: `rotate(-${angle}deg)` }} // Initial offset counter-rotation
+                      >
+                        <tag.icon className="w-4 h-4 text-gray-500" strokeWidth={2} />
+                        <span>{tag.text}</span>
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
 
           <div className="h-full w-full max-w-[400px] relative transform scale-100 origin-center z-10">
             <ThreeDBrain />

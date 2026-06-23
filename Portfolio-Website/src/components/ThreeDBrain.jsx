@@ -1,83 +1,57 @@
-import React, { useRef, useMemo, useState, useEffect } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
-function BrainParticles() {
+function GlobeParticles() {
   const groupRef = useRef();
-  const leftPointsRef = useRef();
-  const rightPointsRef = useRef();
+  const pointsRef = useRef();
   const linesRef = useRef();
   
   const { mouse, viewport } = useThree();
-
-  // Target rotation based on mouse
   const targetRotation = useRef({ x: 0, y: 0 });
 
-  // Generate points for two hemispheres
-  const { leftPositions, rightPositions, linePositions } = useMemo(() => {
-    const left = [];
-    const right = [];
+  // Generate globe points and connections
+  const { positions, linePositions } = useMemo(() => {
+    const points = [];
+    const vectors = [];
     
-    // Left Hemisphere (Structured, fewer points for lines)
-    const leftPointCount = 400;
-    const leftVectors = [];
-    for (let i = 0; i < leftPointCount; i++) {
-      const r = 2;
-      const theta = 2 * Math.PI * Math.random();
-      const phi = Math.acos(2 * Math.random() - 1);
-      const x = r * Math.sin(phi) * Math.cos(theta);
-      const y = r * Math.sin(phi) * Math.sin(theta);
-      const z = r * Math.cos(phi);
+    // Generate points in a thick spherical shell
+    let count = 0;
+    while (count < 800) {
+      let x = (Math.random() - 0.5) * 4;
+      let y = (Math.random() - 0.5) * 4;
+      let z = (Math.random() - 0.5) * 4;
 
-      const px = x * 0.8;
-      const py = y * 0.6;
-      const pz = z * 1;
+      let dist = Math.sqrt(x*x + y*y + z*z);
 
-      if (px < -0.1) {
-        leftVectors.push(new THREE.Vector3(px, py, pz));
-        left.push(px, py, pz);
+      // Shell between radius 1.2 and 1.8
+      if (dist > 1.2 && dist < 1.8) {
+        vectors.push(new THREE.Vector3(x, y, z));
+        points.push(x, y, z);
+        count++;
       }
     }
 
-    // Connect close points in left hemisphere
+    // Connect close points to form the network
     const lines = [];
-    for (let i = 0; i < leftVectors.length; i++) {
-      for (let j = i + 1; j < leftVectors.length; j++) {
-        const dist = leftVectors[i].distanceTo(leftVectors[j]);
-        if (dist < 0.35) { // Threshold for connection
+    for (let i = 0; i < vectors.length; i++) {
+      let connections = 0;
+      for (let j = i + 1; j < vectors.length; j++) {
+        const d = vectors[i].distanceTo(vectors[j]);
+        if (d < 0.45 && connections < 4) { // Connect up to 4 nearby points
           lines.push(
-            leftVectors[i].x, leftVectors[i].y, leftVectors[i].z,
-            leftVectors[j].x, leftVectors[j].y, leftVectors[j].z
+            vectors[i].x, vectors[i].y, vectors[i].z,
+            vectors[j].x, vectors[j].y, vectors[j].z
           );
+          connections++;
         }
       }
     }
 
-    // Right Hemisphere (Scattered, more points)
-    const rightPointCount = 1500;
-    for (let i = 0; i < rightPointCount; i++) {
-      const r = 2;
-      const theta = 2 * Math.PI * Math.random();
-      const phi = Math.acos(2 * Math.random() - 1);
-      const x = r * Math.sin(phi) * Math.cos(theta);
-      const y = r * Math.sin(phi) * Math.sin(theta);
-      const z = r * Math.cos(phi);
-
-      const px = x * 0.8;
-      const py = y * 0.6;
-      const pz = z * 1;
-
-      if (px > 0.1) {
-        // Add random scatter to right side
-        right.push(px + (Math.random() - 0.5) * 0.5, py + (Math.random() - 0.5) * 0.5, pz + (Math.random() - 0.5) * 0.5);
-      }
-    }
-
     return { 
-      leftPositions: new Float32Array(left),
-      rightPositions: new Float32Array(right),
+      positions: new Float32Array(points),
       linePositions: new Float32Array(lines)
     };
   }, []);
@@ -94,23 +68,13 @@ function BrainParticles() {
       groupRef.current.rotation.x += (targetRotation.current.x - groupRef.current.rotation.x) * 0.02;
       groupRef.current.rotation.y += (targetRotation.current.y - groupRef.current.rotation.y) * 0.02;
 
-      // Base slow rotation
+      // Base slow rotation (spin around all axes slowly)
       groupRef.current.rotation.y += 0.002;
+      groupRef.current.rotation.z += 0.001;
 
       // Breathing animation (scaling)
       const scale = 1 + Math.sin(time * 1.5) * 0.02;
       groupRef.current.scale.set(scale, scale, scale);
-    }
-    
-    // Right hemisphere particle dispersion
-    if (rightPointsRef.current) {
-      const positions = rightPointsRef.current.geometry.attributes.position.array;
-      for (let i = 0; i < positions.length; i += 3) {
-        // Subtle wiggling motion
-        positions[i] += Math.sin(time * 0.5 + i) * 0.0002;
-        positions[i+1] += Math.cos(time * 0.5 + i) * 0.0002;
-      }
-      rightPointsRef.current.geometry.attributes.position.needsUpdate = true;
     }
   });
 
@@ -118,19 +82,19 @@ function BrainParticles() {
     <group ref={groupRef}>
       
       {/* Central Glowing Energy Point */}
-      <Sphere args={[0.4, 32, 32]} position={[0, 0, 0]}>
+      <Sphere args={[0.5, 32, 32]} position={[0, 0, 0]}>
         <meshBasicMaterial color="#4F6F52" transparent opacity={0.15} />
       </Sphere>
-      <Sphere args={[0.2, 32, 32]} position={[0, 0, 0]}>
+      <Sphere args={[0.25, 32, 32]} position={[0, 0, 0]}>
         <meshBasicMaterial color="#4F6F52" transparent opacity={0.3} />
       </Sphere>
 
-      {/* Left Hemisphere - Structured Nodes */}
-      <Points ref={leftPointsRef} positions={leftPositions} stride={3} frustumCulled={false}>
+      {/* Globe Nodes */}
+      <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
         <PointMaterial transparent color="#4F6F52" size={0.06} sizeAttenuation={true} depthWrite={false} opacity={0.9} />
       </Points>
 
-      {/* Left Hemisphere - Neural Lines */}
+      {/* Globe Neural Lines */}
       <lineSegments ref={linesRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -143,10 +107,6 @@ function BrainParticles() {
         <lineBasicMaterial color="#4F6F52" transparent opacity={0.25} />
       </lineSegments>
 
-      {/* Right Hemisphere - Scattered / Raw Data */}
-      <Points ref={rightPointsRef} positions={rightPositions} stride={3} frustumCulled={false}>
-        <PointMaterial transparent color="#a1a1aa" size={0.04} sizeAttenuation={true} depthWrite={false} opacity={0.7} />
-      </Points>
     </group>
   );
 }
@@ -156,12 +116,10 @@ export default function ThreeDBrain() {
     <div className="w-full h-full cursor-pointer relative">
       <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
         <ambientLight intensity={0.5} />
-        <BrainParticles />
+        <GlobeParticles />
         <EffectComposer>
-          {/* subtle bloom for the neural lines and glowing core */}
           <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.2} />
         </EffectComposer>
-        {/* Disable orbit controls so mouse interaction is entirely custom based on viewport mouse */}
       </Canvas>
     </div>
   );

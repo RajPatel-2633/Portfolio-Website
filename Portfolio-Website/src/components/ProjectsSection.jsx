@@ -299,16 +299,16 @@ export default function ProjectsSection() {
     <section ref={targetRef} id="projects" className="relative h-[400vh] bg-[#FAFAFA]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
         
-        <div className="absolute top-12 left-12 z-50 flex items-center space-x-3">
+        <div className="absolute top-6 md:top-8 lg:top-10 left-6 md:left-12 z-50 flex items-center space-x-3">
           <h2 className="text-3xl font-black tracking-tighter text-black uppercase">Selected Works</h2>
           <div className="w-2 h-2 rounded-full bg-[#4F6F52] animate-pulse" />
         </div>
 
         <motion.div style={{ x }} className="flex h-full w-[400vw]">
           {PROJECTS.map((project, idx) => (
-            <div key={project.id} className="w-screen h-full flex items-center justify-center p-6 md:p-12 lg:p-24 pt-32">
+            <div key={project.id} className="w-screen h-full flex items-center justify-center p-6 md:p-12 lg:px-24 lg:pb-24 lg:pt-40 pt-32">
               
-              <div className="w-full max-w-7xl h-[80vh] bg-white rounded-[2rem] shadow-[0_20px_80px_-20px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col lg:flex-row overflow-hidden relative">
+              <div className="w-full max-w-7xl h-[75vh] md:h-[80vh] min-h-[500px] bg-white rounded-[2rem] shadow-[0_20px_80px_-20px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col lg:flex-row overflow-hidden relative">
                 
                 {/* Project Info Side */}
                 <div className="w-full lg:w-[35%] p-10 lg:p-16 flex flex-col justify-center relative z-10 bg-white">

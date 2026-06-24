@@ -1,77 +1,162 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Lightbulb, Monitor, Server, Cloud, Brain, Globe, ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Lightbulb, Monitor, Server, Cloud, Brain, Globe } from 'lucide-react';
 
 const PIPELINE_STEPS = [
-  { icon: Lightbulb, title: "Problem", desc: "Identify real-world problems" },
-  { icon: Monitor, title: "Interface", desc: "React\nBeautiful UI/UX" },
-  { icon: Server, title: "Backend", desc: "Node.js / Express\nRESTful APIs" },
-  { icon: Cloud, title: "AI Gateway", desc: "FastAPI\nHigh performance" },
-  { icon: Brain, title: "Intelligence", desc: "TensorFlow\nLangChain\nAI/ML Models" },
-  { icon: Globe, title: "Impact", desc: "Real world\npositive impact" }
+  { 
+    icon: Lightbulb, 
+    title: "Problem", 
+    desc: "Identify real-world problems and architectural bottlenecks.",
+    skills: ["Systems Analysis", "Requirements Gathering", "Research"]
+  },
+  { 
+    icon: Monitor, 
+    title: "Interface", 
+    desc: "Crafting beautiful, intuitive, and highly responsive UI/UX.",
+    skills: ["React", "Tailwind CSS", "Framer Motion", "UI/UX Design"]
+  },
+  { 
+    icon: Server, 
+    title: "Backend", 
+    desc: "Architecting robust, scalable, and secure RESTful APIs.",
+    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"]
+  },
+  { 
+    icon: Cloud, 
+    title: "AI Gateway", 
+    desc: "Building high-performance bridges between web clients and AI models.",
+    skills: ["FastAPI", "Python", "WebSockets", "Docker"]
+  },
+  { 
+    icon: Brain, 
+    title: "Intelligence", 
+    desc: "Training, fine-tuning, and deploying advanced machine learning models.",
+    skills: ["TensorFlow", "LangChain", "LLMs", "Computer Vision"]
+  },
+  { 
+    icon: Globe, 
+    title: "Impact", 
+    desc: "Delivering measurable, real-world positive impact at scale.",
+    skills: ["Deployment", "CI/CD", "Performance Optimization", "Scaling"]
+  }
 ];
 
 export default function EngineeringPipeline() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section className="py-20 bg-white relative">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="flex items-center space-x-2 mb-16">
-          <h2 className="text-xl font-bold text-black">How I Build Intelligent Systems</h2>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#4F6F52]" />
+    <section ref={containerRef} className="py-32 bg-[#FAFAFA] relative overflow-hidden">
+      
+      <div className="container mx-auto px-6 max-w-7xl relative">
+        {/* Title Area */}
+        <div className="flex flex-col items-center justify-center text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center space-x-2 px-4 py-2 bg-green-50 rounded-full mb-6"
+          >
+            <div className="w-2 h-2 rounded-full bg-[#4F6F52] animate-pulse" />
+            <span className="text-sm font-bold text-[#4F6F52] uppercase tracking-widest">My Architecture</span>
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-6xl font-black tracking-tighter text-black uppercase"
+          >
+            The Engineering Ecosystem
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-500 mt-6 max-w-2xl"
+          >
+            How I bridge the gap between front-end interfaces, scalable backends, and complex AI models to build cohesive, intelligent systems.
+          </motion.p>
         </div>
 
-        <div className="relative w-full overflow-x-auto pb-8 hide-scrollbar">
-          <div className="min-w-[1000px] flex items-start justify-between relative px-8">
-            
-            {/* Continuous background line */}
-            <div className="absolute top-[32px] left-16 right-16 h-[2px] bg-gray-100 -z-10" />
-            {/* Animated green line */}
-            <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: "calc(100% - 8rem)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute top-[32px] left-16 h-[2px] bg-[#4F6F52]/30 -z-10"
-            />
+        {/* Timeline Container */}
+        <div className="relative w-full max-w-5xl mx-auto">
+          
+          {/* Background Line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2 rounded-full" />
+          
+          {/* Animated Glowing Line */}
+          <motion.div 
+            style={{ height: lineHeight }}
+            className="absolute left-8 md:left-1/2 top-0 w-1 bg-gradient-to-b from-[#4F6F52] via-green-400 to-[#4F6F52] -translate-x-1/2 rounded-full shadow-[0_0_15px_rgba(79,111,82,0.8)] z-0 origin-top"
+          />
 
-            {PIPELINE_STEPS.map((step, idx) => (
-              <div key={idx} className="flex flex-col items-center relative w-40">
-                <motion.div 
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2, type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-16 h-16 bg-white border-2 border-gray-100 rounded-2xl flex items-center justify-center mb-4 z-10 shadow-sm"
-                >
-                  <step.icon className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
-                </motion.div>
+          {PIPELINE_STEPS.map((step, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <div key={index} className={`relative flex items-center justify-between md:justify-normal w-full mb-20 md:mb-32 ${isEven ? 'md:flex-row-reverse' : ''}`}>
                 
+                {/* Center Icon Node */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    className="w-16 h-16 rounded-full bg-white border-4 border-[#FAFAFA] shadow-[0_0_30px_rgba(0,0,0,0.1)] flex items-center justify-center relative"
+                  >
+                    {/* Glowing ring when active */}
+                    <motion.div 
+                      className="absolute inset-0 rounded-full border-2 border-[#4F6F52]"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                    />
+                    <step.icon className="w-6 h-6 text-[#4F6F52]" />
+                  </motion.div>
+                </div>
+
+                {/* Content Card */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2 + 0.2 }}
-                  className="text-center"
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className={`w-[calc(100%-5rem)] md:w-[calc(50%-4rem)] pl-8 md:pl-0 ${isEven ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'}`}
                 >
-                  <h3 className="text-sm font-bold text-black mb-1">{step.title}</h3>
-                  <p className="text-[10px] text-gray-500 whitespace-pre-line leading-tight">{step.desc}</p>
+                  <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
+                    <h3 className="text-3xl font-black text-black mb-3">{step.title}</h3>
+                    <p className="text-gray-600 mb-6">{step.desc}</p>
+                    
+                    {/* Skill Tags */}
+                    <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+                      {step.skills.map((skill, skillIdx) => (
+                        <motion.span 
+                          key={skillIdx}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.4 + (skillIdx * 0.1), type: "spring" }}
+                          whileHover={{ scale: 1.05, backgroundColor: "#4F6F52", color: "#ffffff" }}
+                          className="px-4 py-2 bg-gray-50 text-gray-700 text-sm font-bold rounded-xl border border-gray-100 cursor-pointer transition-colors duration-300"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
 
-                {/* Optional Right Arrow for the line, placed absolutely */}
-                {idx < PIPELINE_STEPS.length - 1 && (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.2 + 0.3 }}
-                    className="absolute top-[26px] -right-4 bg-white px-1 z-10"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#4F6F52]" />
-                  </motion.div>
-                )}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -66,7 +66,7 @@ const TypewriterText = () => {
 
   return (
     <span className="inline-block min-h-[32px]">
-      {text}<span className="animate-pulse ml-[2px] text-[#4F6F52] font-light">|</span>
+      {text}<span className="animate-cursor-blink ml-[2px] text-[#4F6F52] font-light">|</span>
     </span>
   );
 };

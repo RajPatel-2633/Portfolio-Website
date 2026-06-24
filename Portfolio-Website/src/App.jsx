@@ -47,12 +47,11 @@ function App() {
         <main className="w-full min-h-screen">
           <div id="home"><Hero /></div>
           <div id="about"><AboutSection /></div>
-          <AchievementStats />
+          <div id="achievements"><AchievementsCards /></div>
           <div id="projects"><ProjectsSection /></div>
           <EngineeringPipeline />
           <JourneyTimeline />
           <div id="experience"><Experience /></div>
-          <div id="achievements"><AchievementsCards /></div>
           <div id="contact"><ContactTerminal /></div>
           <AIChatbot />
         </main>

@@ -1,87 +1,136 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 export default function ContactTerminal() {
+  const text = "Open to collaborations on real world projects and job roles.";
+  const words = text.split(" ");
+
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
+    }
+  };
+
+  const wordAnim = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
+
   return (
-    <section className="py-20 bg-white relative border-t border-gray-100">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Column 1: Text & Info */}
-          <div className="lg:col-span-4 flex flex-col">
-            <h2 className="text-3xl font-bold tracking-tighter text-black mb-4">
-              Let's build something<br />amazing together.
-            </h2>
-            <p className="text-sm text-gray-500 mb-8 max-w-xs">
-              Open to opportunities in AI/ML, Full Stack Development and Research Collaborations.
-            </p>
-            
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Phone className="w-4 h-4 text-gray-400" />
-                <span className="text-sm">+91 7600683190</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-sm">rajpatel.260303@gmail.com</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <MapPin className="w-4 h-4 text-gray-400" />
-                <span className="text-sm">Bharuch, Gujarat, India</span>
-              </div>
-            </div>
-          </div>
+    <section className="py-32 md:py-48 bg-white relative overflow-hidden flex items-center justify-center">
+      <div className="container mx-auto px-6 max-w-4xl text-center flex flex-col items-center">
+        
+        {/* Elegant Status Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-50 border border-gray-100 rounded-full mb-12"
+        >
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Available</span>
+        </motion.div>
 
-          {/* Column 2: Terminal */}
-          <div className="lg:col-span-5 w-full">
-            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-full flex flex-col">
-              <div className="bg-gray-50 px-4 py-2 flex items-center justify-between border-b border-gray-100">
-                <div className="text-xs font-semibold text-gray-700">root@rajpatel:~$</div>
-                <div className="flex space-x-1">
-                  <div className="w-1 h-1 rounded-full bg-gray-400" />
-                  <div className="w-1 h-1 rounded-full bg-gray-400" />
-                  <div className="w-1 h-1 rounded-full bg-gray-400" />
-                </div>
-              </div>
-              <div className="p-6 font-mono text-[10px] sm:text-xs text-gray-600 space-y-2.5">
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-                  <span className="text-gray-400">&gt;</span> Checking availability...
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}>
-                  <span className="text-gray-400">&gt;</span> AI Engineer: <span className="text-[#4F6F52] font-semibold">TRUE</span>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.0 }}>
-                  <span className="text-gray-400">&gt;</span> MERN Developer: <span className="text-[#4F6F52] font-semibold">TRUE</span>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>
-                  <span className="text-gray-400">&gt;</span> Research Enthusiast: <span className="text-[#4F6F52] font-semibold">TRUE</span>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2.0 }}>
-                  <span className="text-gray-400">&gt;</span> Status: <span className="bg-green-100 text-green-700 px-1 py-0.5 rounded flex-inline items-center space-x-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse"></span><span>Available for opportunities</span></span>
-                </motion.div>
-              </div>
-            </div>
-          </div>
+        {/* Smooth Staggered Text Reveal */}
+        <motion.h2 
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-black leading-[1.1] mb-16 max-w-3xl flex flex-wrap justify-center gap-x-3 md:gap-x-4"
+        >
+          {words.map((word, index) => (
+            <motion.span key={index} variants={wordAnim} className="inline-block">
+              {word}
+            </motion.span>
+          ))}
+        </motion.h2>
 
-          {/* Column 3: Socials */}
-          <div className="lg:col-span-3 flex flex-col lg:items-end">
-            <h3 className="text-sm font-bold text-black mb-4">Connect with me</h3>
-            <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-black hover:bg-gray-50 transition-colors">
-                <FaGithub className="w-4 h-4" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-black hover:bg-gray-50 transition-colors">
-                <FaLinkedin className="w-4 h-4" />
-              </a>
-              <a href="mailto:rajpatel.260303@gmail.com" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-black hover:bg-gray-50 transition-colors">
-                <Mail className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
+        {/* Elegant Social Links */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.1, delayChildren: 0.8 }}
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-8"
+        >
+          <motion.a 
+            variants={iconVariants}
+            href="mailto:rajpatel.260303@gmail.com" 
+            whileHover={{ scale: 1.05, y: -4 }}
+            className="px-6 py-4 rounded-full bg-gray-50 border border-gray-100 flex items-center space-x-3 text-gray-600 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <Mail className="w-5 h-5" />
+            <span className="font-medium text-sm md:text-base">rajpatel.260303@gmail.com</span>
+          </motion.a>
 
-        </div>
+          <motion.a 
+            variants={iconVariants}
+            href="https://linkedin.com/in/rajpatel" 
+            target="_blank" 
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, y: -4 }}
+            className="px-6 py-4 rounded-full bg-gray-50 border border-gray-100 flex items-center space-x-3 text-gray-600 hover:text-[#0077b5] hover:border-[#0077b5]/30 hover:bg-[#0077b5]/5 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <FaLinkedin className="w-5 h-5" />
+            <span className="font-medium text-sm md:text-base">in/rajpatel</span>
+          </motion.a>
+
+          <motion.a 
+            variants={iconVariants}
+            href="https://github.com/rajpatel" 
+            target="_blank" 
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, y: -4 }}
+            className="px-6 py-4 rounded-full bg-gray-50 border border-gray-100 flex items-center space-x-3 text-gray-600 hover:text-black hover:border-gray-300 hover:bg-gray-100 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <FaGithub className="w-5 h-5" />
+            <span className="font-medium text-sm md:text-base">@rajpatel</span>
+          </motion.a>
+
+          <motion.a 
+            variants={iconVariants}
+            href="https://instagram.com" 
+            target="_blank" 
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, y: -4 }}
+            className="px-6 py-4 rounded-full bg-gray-50 border border-gray-100 flex items-center space-x-3 text-gray-600 hover:text-pink-600 hover:border-pink-200 hover:bg-pink-50 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <FaInstagram className="w-5 h-5" />
+            <span className="font-medium text-sm md:text-base">@rajpatel</span>
+          </motion.a>
+        </motion.div>
+
+        {/* Footer Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="mt-32 text-sm text-gray-400 font-medium"
+        >
+          © {new Date().getFullYear()} Raj Patel. Crafted with precision.
+        </motion.div>
+
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-const LINKS = ['Home', 'About', 'Projects', 'Experience', 'Achievements', 'Skills', 'Contact'];
+const LINKS = ['Home', 'About', 'Achievements', 'Projects', 'Experience', 'Skills', 'Contact'];
 
 export default function Header() {
   return (

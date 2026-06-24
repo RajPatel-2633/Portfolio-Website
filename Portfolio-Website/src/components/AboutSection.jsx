@@ -44,11 +44,11 @@ const TypewriterTitle = () => {
     <h3 ref={ref} className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight min-h-[96px] md:min-h-[110px]">
       <div className="text-black">
         {text1}
-        {showCursor1 && <span className="animate-pulse ml-[2px] text-[#4F6F52] font-light">|</span>}
+        {showCursor1 && <span className="animate-cursor-blink ml-[2px] text-[#4F6F52] font-light">|</span>}
       </div>
       <div className="text-gray-400 mt-1 md:mt-2">
         {text2}
-        {showCursor2 && <span className="animate-pulse ml-[2px] text-[#4F6F52] font-light">|</span>}
+        {showCursor2 && <span className="animate-cursor-blink ml-[2px] text-[#4F6F52] font-light">|</span>}
       </div>
     </h3>
   );

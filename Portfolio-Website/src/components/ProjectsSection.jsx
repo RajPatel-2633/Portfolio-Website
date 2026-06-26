@@ -583,40 +583,40 @@ const AstroVisual = () => {
 
 const LeetSpaceVisual = () => {
   const codeLines = [
-    { text: <><span className="text-blue-400">class</span> <span className="text-yellow-200">Solution</span> {'{'}</>, delay: 0.2, duration: 0.3 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-400">public:</span></>, delay: 0.5, duration: 0.2 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-400">vector</span>&lt;<span className="text-green-400">int</span>&gt; <span className="text-yellow-200">twoSum</span>(<span className="text-blue-400">vector</span>&lt;<span className="text-green-400">int</span>&gt;& nums, <span className="text-green-400">int</span> target) {'{'}</>, delay: 0.7, duration: 0.6 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-400">unordered_map</span>&lt;<span className="text-green-400">int</span>, <span className="text-green-400">int</span>&gt; numMap;</>, delay: 1.3, duration: 0.5 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">for</span> (<span className="text-green-400">int</span> i = <span className="text-orange-300">0</span>; i &lt; nums.size(); i++) {'{'}</>, delay: 1.8, duration: 0.5 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">int</span> complement = target - nums[i];</>, delay: 2.3, duration: 0.4 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">if</span> (numMap.count(complement)) {'{'}</>, delay: 2.7, duration: 0.4 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">return</span> {'{'}numMap[complement], i{'}'};</>, delay: 3.1, duration: 0.4 },
+    { text: <><span className="text-[#ffa759]">class</span> <span className="text-[#ffd580]">Solution</span> {'{'}</>, delay: 0.2, duration: 0.3 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ffa759]">public:</span></>, delay: 0.5, duration: 0.2 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#5ccfe6]">vector</span>&lt;<span className="text-[#5ccfe6]">int</span>&gt; <span className="text-[#ffd580]">twoSum</span>(<span className="text-[#5ccfe6]">vector</span>&lt;<span className="text-[#5ccfe6]">int</span>&gt;&amp; nums, <span className="text-[#5ccfe6]">int</span> target) {'{'}</>, delay: 0.7, duration: 0.6 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#5ccfe6]">unordered_map</span>&lt;<span className="text-[#5ccfe6]">int</span>, <span className="text-[#5ccfe6]">int</span>&gt; numMap;</>, delay: 1.3, duration: 0.5 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ffa759]">for</span> (<span className="text-[#5ccfe6]">int</span> i = <span className="text-[#d4bfff]">0</span>; i &lt; nums.size(); i++) {'{'}</>, delay: 1.8, duration: 0.5 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#5ccfe6]">int</span> complement = target - nums[i];</>, delay: 2.3, duration: 0.4 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ffa759]">if</span> (numMap.count(complement)) {'{'}</>, delay: 2.7, duration: 0.4 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ffa759]">return</span> {'{'}numMap[complement], i{'}'};</>, delay: 3.1, duration: 0.4 },
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'}'}</>, delay: 3.5, duration: 0.1 },
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numMap[nums[i]] = i;</>, delay: 3.6, duration: 0.3 },
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'}'}</>, delay: 3.9, duration: 0.1 },
-    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">return</span> {'{}'};</>, delay: 4.0, duration: 0.2 },
+    { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ffa759]">return</span> {'{}'};</>, delay: 4.0, duration: 0.2 },
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'}'}</>, delay: 4.2, duration: 0.1 },
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;{'}'};</>, delay: 4.3, duration: 0.1 },
   ];
 
   return (
-    <div className="w-full h-full bg-[#0f172a] rounded-3xl border border-gray-800 flex flex-col overflow-hidden shadow-2xl relative font-mono text-sm">
+    <div className="w-full h-full bg-[#1f2430] rounded-3xl border border-gray-800 flex flex-col overflow-hidden shadow-2xl relative font-mono text-sm text-[#cbccc6]">
       
       {/* Top Bar */}
-      <div className="h-12 border-b border-gray-800 flex items-center px-4 space-x-2 bg-[#0f172a] z-10 shrink-0">
+      <div className="h-12 border-b border-gray-800 flex items-center px-4 space-x-2 bg-[#1f2430] z-10 shrink-0">
         <div className="flex space-x-1.5 mr-4">
           <div className="w-3 h-3 rounded-full bg-red-500/80" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <div className="w-3 h-3 rounded-full bg-green-500/80" />
         </div>
-        <div className="text-xs text-gray-400 bg-[#1e293b] px-3 py-1.5 rounded-t-md flex items-center space-x-2 border-t border-x border-gray-700/50 mt-2">
-          <Code2 className="w-3 h-3 text-blue-400" />
+        <div className="text-xs text-gray-400 bg-[#242b38] px-3 py-1.5 rounded-t-md flex items-center space-x-2 border-t border-x border-gray-700/50 mt-2">
+          <Code2 className="w-3 h-3 text-[#5ccfe6]" />
           <span>Solution.cpp</span>
         </div>
       </div>
       
       {/* Editor Area */}
-      <div className="flex-1 flex relative overflow-hidden bg-[#0f172a]">
+      <div className="flex-1 flex relative overflow-hidden bg-[#1f2430]">
         {/* Line Numbers */}
         <div className="w-10 border-r border-gray-800/80 flex flex-col items-end pr-2 pt-4 space-y-1 text-gray-600/60 text-xs shrink-0 select-none">
           {[...Array(14)].map((_, i) => <span key={i}>{i+1}</span>)}
@@ -641,15 +641,15 @@ const LeetSpaceVisual = () => {
         </div>
       </div>
       
-      {/* Terminal / Judge Side (Slides up at 4.5s) */}
+      {/* Terminal / Judge Side (Slides up at 4.6s) */}
       <motion.div 
         initial={{ y: "100%" }}
         whileInView={{ y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 4.8, type: "spring", bounce: 0.2, duration: 0.8 }}
-        className="h-[45%] bg-[#0f172a]/95 border-t border-gray-800 flex flex-col shrink-0 absolute bottom-0 w-full z-20 backdrop-blur-md"
+        viewport={{ once: true, margin: "1000px" }}
+        transition={{ delay: 4.6, type: "spring", bounce: 0.2, duration: 0.8 }}
+        className="h-[45%] bg-[#1f2430]/95 border-t border-gray-800 flex flex-col shrink-0 absolute bottom-0 w-full z-20 backdrop-blur-md"
       >
-        <div className="h-10 border-b border-gray-800 flex items-center px-4 bg-[#0f172a] text-xs font-mono text-gray-400 space-x-4 shrink-0">
+        <div className="h-10 border-b border-gray-800 flex items-center px-4 bg-[#1f2430] text-xs font-mono text-gray-400 space-x-4 shrink-0">
           <span className="text-gray-300 font-bold border-b-2 border-green-500 h-full flex items-center">Console</span>
           <span>Testcase</span>
           <span>Result</span>
@@ -657,24 +657,24 @@ const LeetSpaceVisual = () => {
         
         <div className="p-4 flex-1 flex flex-col relative overflow-hidden text-xs sm:text-sm">
           
-          {/* Compiling State (visible 5.0 to 6.5) */}
+          {/* Compiling State (visible 5.2 to 5.9) */}
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: [0, 1, 1, 0] }}
-            viewport={{ once: true }}
-            transition={{ delay: 5.0, duration: 1.5, times: [0, 0.1, 0.9, 1] }}
-            className="absolute inset-0 flex flex-col items-center justify-center space-y-3 bg-[#0f172a] z-10"
+            viewport={{ once: true, margin: "1000px" }}
+            transition={{ delay: 5.2, duration: 0.7, times: [0, 0.1, 0.9, 1] }}
+            className="absolute inset-0 flex flex-col items-center justify-center space-y-3 bg-[#1f2430] z-10"
           >
             <div className="w-6 h-6 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" />
             <span className="text-gray-400 font-mono">Compiling & Running...</span>
           </motion.div>
 
-          {/* Testcases & Success (visible after 6.5) */}
+          {/* Testcases & Success (visible after 5.9) */}
           <motion.div 
              initial={{ opacity: 0 }}
              whileInView={{ opacity: 1 }}
-             viewport={{ once: true }}
-             transition={{ delay: 6.5 }}
+             viewport={{ once: true, margin: "1000px" }}
+             transition={{ delay: 5.9 }}
              className="flex flex-col h-full space-y-3"
           >
             <div className="flex space-x-2">
@@ -683,8 +683,8 @@ const LeetSpaceVisual = () => {
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 6.5 + (i * 0.15) }}
+                  viewport={{ once: true, margin: "1000px" }}
+                  transition={{ delay: 5.9 + (i * 0.15) }}
                   className="px-2 py-1 bg-gray-800 rounded-md text-gray-300 flex items-center space-x-1"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
@@ -696,8 +696,8 @@ const LeetSpaceVisual = () => {
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 7.2, type: "spring", bounce: 0.6 }}
+              viewport={{ once: true, margin: "1000px" }}
+              transition={{ delay: 6.55, type: "spring", bounce: 0.6 }}
               className="mt-2 bg-green-500/10 border border-green-500/30 p-3 rounded-lg flex flex-col"
             >
               <div className="text-green-400 font-bold text-sm md:text-lg mb-1 flex items-center space-x-2">

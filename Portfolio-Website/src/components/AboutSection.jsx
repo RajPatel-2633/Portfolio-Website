@@ -83,6 +83,13 @@ export default function AboutSection() {
             <p>
               When I'm not writing code, you can usually find me exploring new design trends, participating in hackathons, or enjoying a good cup of coffee while reading up on the latest AI research.
             </p>
+            
+            {/* Embedded Personal Quote */}
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <blockquote className="relative pl-6 border-l-4 border-[#4F6F52] italic text-gray-500 text-base md:text-lg">
+                "I don't just build software, I engineer experiences that bridge the gap between complex logic and human intuition."
+              </blockquote>
+            </div>
           </motion.div>
         </div>
 

@@ -14,6 +14,7 @@ import NeuralNetworkVisualization from './components/NeuralNetworkVisualization'
 import AchievementsCards from './components/AchievementsCards';
 import ContactTerminal from './components/ContactTerminal';
 import AIChatbot from './components/AIChatbot';
+import BeyondTech from './components/BeyondTech';
 import Header from './components/Header';
 import ScrollProgress from './components/ScrollProgress';
 import MatrixCodeBackground from './components/MatrixCodeBackground';
@@ -52,6 +53,7 @@ function App() {
           <EngineeringPipeline />
           <JourneyTimeline />
           <div id="experience"><Experience /></div>
+          <div id="beyond-tech"><BeyondTech /></div>
           <div id="contact"><ContactTerminal /></div>
           <AIChatbot />
         </main>

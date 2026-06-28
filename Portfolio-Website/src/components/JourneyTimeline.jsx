@@ -90,17 +90,6 @@ export default function JourneyTimeline() {
       
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
         
-        {/* Parallax Background Typography Layer */}
-        <motion.div 
-          style={{ x: backgroundX }} 
-          className="absolute top-1/2 -translate-y-1/2 flex whitespace-nowrap opacity-[0.03] pointer-events-none select-none z-0"
-        >
-          {MILESTONES.map((m, i) => (
-            <span key={`bg-${i}`} className="text-[30vw] font-black mr-[20vw] leading-none text-black">
-              {m.year}
-            </span>
-          ))}
-        </motion.div>
 
         {/* Title overlay fixed in the center top */}
         <div className="absolute top-6 md:top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none flex flex-col items-center w-full text-center">

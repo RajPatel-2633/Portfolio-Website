@@ -56,7 +56,7 @@ export default function EngineeringPipeline() {
   const clipPath = useMotionTemplate`inset(0% 0% ${clipBottom}% 0%)`;
 
   return (
-    <section ref={containerRef} className="py-32 bg-[#FAFAFA] relative overflow-hidden">
+    <section ref={containerRef} className="pt-32 pb-8 md:pb-12 bg-[#FAFAFA] relative overflow-hidden">
       
       {/* --- Abstract Canopy Foliage (Blurred Circles) --- */}
       {/* Center Canopy */}

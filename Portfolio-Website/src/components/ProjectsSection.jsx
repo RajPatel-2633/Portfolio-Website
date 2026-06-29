@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, Leaf, Mic, Sparkles, Code2, Database, BrainCircuit, ExternalLink, Search, MessageSquare } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
@@ -7,9 +7,26 @@ const KissanVisual = () => {
   // Determine if we are on desktop to apply the horizontal shift
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
   const initialX = isDesktop ? 250 : 0;
+  
+  const [key, setKey] = useState(0);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (inView) {
+      interval = setInterval(() => setKey(prev => prev + 1), 9000);
+    }
+    return () => clearInterval(interval);
+  }, [inView]);
 
   return (
-    <div className="w-full h-full bg-[#f8faf8] rounded-3xl border border-gray-200 flex items-center justify-center relative overflow-hidden shadow-[inset_0_4px_40px_rgba(0,0,0,0.02)]">
+    <motion.div 
+      viewport={{ amount: 0.5 }}
+      onViewportEnter={() => { setInView(true); setKey(prev => prev + 1); }}
+      onViewportLeave={() => setInView(false)}
+      className="w-full h-full"
+    >
+      <div key={key} className="w-full h-full bg-[#f8faf8] rounded-3xl border border-gray-200 flex items-center justify-center relative overflow-hidden shadow-[inset_0_4px_40px_rgba(0,0,0,0.02)]">
       <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNlMmU4ZTIiLz48L3N2Zz4=')] opacity-50" />
       
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full max-w-5xl px-4 md:px-8 z-10 gap-4">
@@ -177,13 +194,31 @@ const KissanVisual = () => {
         </motion.div>
 
       </div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
 const MockMindVisual = () => {
+  const [key, setKey] = useState(0);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (inView) {
+      interval = setInterval(() => setKey(prev => prev + 1), 12000);
+    }
+    return () => clearInterval(interval);
+  }, [inView]);
+
   return (
-    <div className="w-full h-full bg-zinc-950 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden shadow-2xl group border border-white/5">
+    <motion.div 
+      viewport={{ amount: 0.5 }}
+      onViewportEnter={() => { setInView(true); setKey(prev => prev + 1); }}
+      onViewportLeave={() => setInView(false)}
+      className="w-full h-full"
+    >
+      <div key={key} className="w-full h-full bg-zinc-950 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden shadow-2xl group border border-white/5">
       
       {/* 1. Animated Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
@@ -404,7 +439,8 @@ const MockMindVisual = () => {
         </div>
 
       </div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -428,8 +464,25 @@ const AstroVisual = () => {
     { top: '15%', left: '75%' }, // House 12
   ];
 
+  const [key, setKey] = useState(0);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (inView) {
+      interval = setInterval(() => setKey(prev => prev + 1), 12000);
+    }
+    return () => clearInterval(interval);
+  }, [inView]);
+
   return (
-    <div className="w-full h-full bg-[#dda15e] rounded-3xl border border-[#c2823a] flex items-center justify-center relative overflow-hidden shadow-2xl">
+    <motion.div 
+      viewport={{ amount: 0.5 }}
+      onViewportEnter={() => { setInView(true); setKey(prev => prev + 1); }}
+      onViewportLeave={() => setInView(false)}
+      className="w-full h-full"
+    >
+      <div key={key} className="w-full h-full bg-[#dda15e] rounded-3xl border border-[#c2823a] flex items-center justify-center relative overflow-hidden shadow-2xl">
       
       {/* Background Texture (subtle noise/parchment feel) */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMwMDAiLz4KPC9zdmc+')] mix-blend-multiply" />
@@ -577,7 +630,8 @@ const AstroVisual = () => {
         </motion.div>
 
       </div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -599,8 +653,25 @@ const LeetSpaceVisual = () => {
     { text: <>&nbsp;&nbsp;&nbsp;&nbsp;{'}'};</>, delay: 4.3, duration: 0.1 },
   ];
 
+  const [key, setKey] = useState(0);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (inView) {
+      interval = setInterval(() => setKey(prev => prev + 1), 9000);
+    }
+    return () => clearInterval(interval);
+  }, [inView]);
+
   return (
-    <div className="w-full h-full bg-[#1f2430] rounded-3xl border border-gray-800 flex flex-col overflow-hidden shadow-2xl relative font-mono text-sm text-[#cbccc6]">
+    <motion.div 
+      viewport={{ amount: 0.5 }}
+      onViewportEnter={() => { setInView(true); setKey(prev => prev + 1); }}
+      onViewportLeave={() => setInView(false)}
+      className="w-full h-full"
+    >
+      <div key={key} className="w-full h-full bg-[#1f2430] rounded-3xl border border-gray-800 flex flex-col overflow-hidden shadow-2xl relative font-mono text-sm text-[#cbccc6]">
       
       {/* Top Bar */}
       <div className="h-12 border-b border-gray-800 flex items-center px-4 space-x-2 bg-[#1f2430] z-10 shrink-0">
@@ -714,7 +785,8 @@ const LeetSpaceVisual = () => {
 
         </div>
       </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
